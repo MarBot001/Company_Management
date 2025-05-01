@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Új cég hozzáadása</title>
+</head>
+<body>
+<h1>Új cég</h1>
+<form action="#" th:action="@{/companies}" th:object="${company}" method="post">
+    <p>Név: <input type="text" th:field="*{name}" /></p>
+    <p>Helyszín: <input type="text" th:field="*{location}" /></p>
+    <p><button type="submit">Mentés</button></p>
+</form>
+<a th:href="@{/}">Vissza</a>
+</body>
+</html>

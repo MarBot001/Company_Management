@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Cégek</title>
+</head>
+<body>
+<h1>Regisztrált cégek</h1>
+<table border="1">
+  <tr>
+    <th>Név</th>
+    <th>Helyszín</th>
+  </tr>
+  <tr th:each="company : ${companies}">
+    <td th:text="${company.name}"></td>
+    <td th:text="${company.location}"></td>
+  </tr>
+</table>
+<a th:href="@{/}">Vissza</a>
+</body>
+</html>
