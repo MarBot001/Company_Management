@@ -1,41 +1,38 @@
 package org.beadando.company.service;
 
 import org.beadando.company.model.Employee;
+import org.beadando.company.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import java.util.Optional;
 
 @Service
 public class EmployeeService {
 
-    private final List<Employee> employees = new ArrayList<>();
+    private final EmployeeRepository employeeRepository;
 
-    public List<Employee> findAll() {
-        return employees;
+    public EmployeeService(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
-    public List<Employee> findByCompanyId(String companyId) {
-        return employees.stream()
-                .filter(e -> e.getCompanyId().equals(companyId))
-                .toList();
+    public List<Employee> findAll() {
+        return employeeRepository.findAll();
+    }
+
+    public Optional<Employee> findById(Long id) {
+        return employeeRepository.findById(id);
+    }
+
+    public List<Employee> findByCompanyId(Long companyId) {
+        return employeeRepository.findByCompanyId(companyId);
     }
 
     public Employee add(Employee employee) {
-        employee.setId(UUID.randomUUID().toString());
-        employees.add(employee);
-        return employee;
+        return employeeRepository.save(employee);
     }
 
-    public Employee findById(String id) {
-        return employees.stream()
-                .filter(e -> e.getId().equals(id))
-                .findFirst()
-                .orElse(null);
-    }
-
-    public boolean delete(String id) {
-        return employees.removeIf(e -> e.getId().equals(id));
+    public void delete(Long id) {
+        employeeRepository.deleteById(id);
     }
 }

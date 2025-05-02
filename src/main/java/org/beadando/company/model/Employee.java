@@ -1,15 +1,22 @@
 package org.beadando.company.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Employee {
-    private String id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
     private String position;
-    private String companyId;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 }

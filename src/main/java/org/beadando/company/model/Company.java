@@ -1,16 +1,18 @@
 package org.beadando.company.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 
-import java.util.UUID;
-
+@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Company {
-    private String id = UUID.randomUUID().toString();
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String name;
     private String location;
 }
