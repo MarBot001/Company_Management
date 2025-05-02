@@ -13,7 +13,6 @@
     <table class="table table-bordered mt-4">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Név</th>
             <th>Pozíció</th>
             <th>Cég</th>
@@ -22,7 +21,6 @@
         </thead>
         <tbody>
         <tr th:each="employee : ${employees}">
-            <td th:text="${employee.id}"></td>
             <td th:text="${employee.name}"></td>
             <td th:text="${employee.position}"></td>
             <td th:text="${employee.company.name}"></td>
