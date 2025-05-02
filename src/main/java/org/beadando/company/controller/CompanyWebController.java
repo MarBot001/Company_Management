@@ -33,4 +33,10 @@ public class CompanyWebController {
         companyService.add(company);
         return "redirect:/companies/view";
     }
+
+    @PostMapping(value = "/{id}", params = "_method=delete")
+    public String delete(@PathVariable Long id) {
+        companyService.delete(id);
+        return "redirect:/companies/view";
+    }
 }
