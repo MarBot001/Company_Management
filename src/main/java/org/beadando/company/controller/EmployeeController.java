@@ -4,6 +4,8 @@ import org.beadando.company.model.Employee;
 import org.beadando.company.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
@@ -29,17 +31,18 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public Employee getById(@PathVariable String id) {
-        return employeeService.findById(id);
+    public Employee getById(@PathVariable Long id) {
+        return employeeService.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Alkalmazott nem található"));
     }
 
     @DeleteMapping("/{id}")
-    public boolean delete(@PathVariable String id) {
-        return employeeService.delete(id);
+    public void delete(@PathVariable Long id) {
+        employeeService.delete(id);
     }
 
     @GetMapping("/company/{companyId}")
-    public List<Employee> getByCompany(@PathVariable String companyId) {
+    public List<Employee> getByCompany(@PathVariable Long companyId) {
         return employeeService.findByCompanyId(companyId);
     }
 }
