@@ -37,7 +37,6 @@ public class Employee {
     private Long id;
     private String name;
     private String position;
-
     @ManyToOne
     @JoinColumn(name = "company_id")
     private Company company;
